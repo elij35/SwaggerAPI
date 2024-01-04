@@ -9,6 +9,17 @@ namespace webapp
             : base(options)
         { }
 
+        public static string ConnectionString =
+                "Data Source=dist-6-505.uopnet.plymouth.ac.uk;" +
+                "User Id=EBowen;" +
+                "Password=NdzP574+;" +
+                "TrustServerCertificate=True;";
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(ConnectionString);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("CW2");
