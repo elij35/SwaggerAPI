@@ -11,8 +11,8 @@ using webapp;
 namespace webapp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240104182804_InititalCreate")]
-    partial class InititalCreate
+    [Migration("20240104214037_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
