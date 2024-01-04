@@ -10,7 +10,6 @@ namespace webapp.Controllers
     public class PublicProfileController
     {
         private readonly DataContext _dataContext;
-
         public PublicProfileController(DataContext dataContext)
         {
             _dataContext = dataContext;
@@ -20,6 +19,7 @@ namespace webapp.Controllers
         public async Task<IEnumerable<UserProfile>> Get()
         {
             return await _dataContext.UserProfiles.ToListAsync();
+
         }
     }
 }
