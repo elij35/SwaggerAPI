@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using webapp.Model;
 
 namespace webapp.Controllers
@@ -9,17 +8,19 @@ namespace webapp.Controllers
 
     public class PublicProfileController
     {
-        private readonly DataContext _dataContext;
-        public PublicProfileController(DataContext dataContext)
+        public struct PublicUser(string username, string? aboutMe, string? profilePic)
         {
-            _dataContext = dataContext;
+            public string Username { get; set; } = username;
+            public string? AboutMe { get; set; } = aboutMe;
+            public string? ProfilePictureLink { get; set; } = profilePic;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<UserProfile>> Get()
+        public async Task<string> Index([FromRoute] int id)
         {
-            return await _dataContext.UserProfiles.ToListAsync();
-
+            DataContext db = new();
+            UserProfile? dbUser = db.UserProfiles.FirstOrDefault(user => user.UserID == id);
+            return await new ResultOutput<PublicUser>(new PublicUser(dbUser.UserName, dbUser.AboutMe, dbUser.ProfilePicture)).Serialize();
         }
     }
 }
