@@ -15,6 +15,16 @@ namespace webapp
                 "Password=NdzP574+;" +
                 "TrustServerCertificate=True;";
 
+        public DataContext()
+            : base()
+        {
+            ConnectionString =
+                "Data Source=dist-6-505.uopnet.plymouth.ac.uk;" +
+                "User Id=EBowen;" +
+                "Password=NdzP574+;" +
+                "TrustServerCertificate=True;";
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(ConnectionString);
