@@ -33,6 +33,6 @@ namespace webapp.Model
 
         public string MarketingLanguage { get; set; }
 
-        public int Admin { get; set; }
+        public string Admin { get; set; }
     }
 }

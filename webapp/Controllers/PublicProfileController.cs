@@ -3,7 +3,7 @@ using webapp.Model;
 
 namespace webapp.Controllers
 {
-    [Route("user/public/{id}")]
+    [Route("/user/public/{id}")]
     [ApiController]
 
     public class PublicProfileController
@@ -16,7 +16,7 @@ namespace webapp.Controllers
         }
 
         [HttpGet]
-        public async Task<string> Index([FromRoute] int id)
+        public async Task<string> Get([FromRoute] int id)
         {
             DataContext db = new();
             UserProfile? dbUser = db.UserProfiles.FirstOrDefault(user => user.UserID == id);
