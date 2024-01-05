@@ -21,6 +21,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
+app.UseHttpsRedirection();
 
 app.UseSwagger();
 
@@ -28,8 +29,6 @@ app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/COMP2001/EBowen/swagger/v1/swagger.json", "v1");
 });
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

@@ -15,7 +15,5 @@ namespace webapp
         {
             return JsonSerializer.Serialize(this);
         }
-
-        public static ResultOutput<string> Error = new ResultOutput<string>("Error.");
     }
 }
