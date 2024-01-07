@@ -50,5 +50,23 @@ namespace webapp.Controllers
                 return await new ResultOutput<string>("User successfully created.").Serialize();
             }
         }
+
+        [HttpPost]
+        [Route("/api/user/get-token")]
+        public async Task<string> GenerateToken([FromBody] Login userCredentials)
+        {
+            using (DataContext dbContext = new DataContext())
+            {
+                // Check the database for credentials
+                UserProfile userProfile = dbContext.UserProfiles.FirstOrDefault(user => user.Email == userCredentials.Email);
+
+                if (userProfile == null)
+                {
+                    return await new ResultOutput<string>("User not found in the database").Serialize();
+                }
+                string authToken = Token.Instance.AuthorizeUser(userProfile.UserID);
+                return await new ResultOutput<string>(authToken).Serialize();
+            }
+        }
     }
 }
