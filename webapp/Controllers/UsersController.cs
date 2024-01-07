@@ -85,5 +85,35 @@ namespace webapp.Controllers
             }
             return await new ResultOutput<ShowSelf>(new ShowSelf(userProfile)).Serialize();
         }
+
+        [HttpPut]
+        [Route("/api/user/update")]
+        public async Task<string> UpdateUserDetails([FromBody] UpdateUser info)
+        {
+            Token tokenManager = Token.Instance;
+            int userID = tokenManager.GetIDFromToken(info.Key);
+
+            DataContext dbContext = new DataContext();
+            UserProfile userProfile = dbContext.UserProfiles.FirstOrDefault(user => user.UserID == userID);
+
+            if (userProfile == null)
+            {
+                return await new ResultOutput<string>("User profile not found").Serialize();
+            }
+
+            userProfile.Email = info.Email;
+            userProfile.Location = info.Location;
+            userProfile.Birthday = info.Birthday;
+            userProfile.AboutMe = info.AboutMe;
+            userProfile.ProfilePicture = info.ProfilePicture;
+            userProfile.Units = info.Units;
+            userProfile.ActivityTimePreference = info.ActivityTimePreference;
+            userProfile.Height = info.Height;
+            userProfile.Weight = info.Weight;
+            userProfile.MarketingLanguage = info.MarketingLanguage;
+            dbContext.UserProfiles.Update(userProfile);
+            await dbContext.SaveChangesAsync();
+            return await new ResultOutput<string>("User profile updated").Serialize();
+        }
     }
 }
