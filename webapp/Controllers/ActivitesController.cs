@@ -8,7 +8,7 @@ namespace webapp.Controllers
     public class ActivitiesController
     {
         [HttpGet]
-        [Route("/api/user/activities")]
+        [Route("/api/activities")]
         public async Task<IEnumerable<ActivityData>> Get()
         {
             return await new DataContext().FavouriteActivities.ToListAsync();
