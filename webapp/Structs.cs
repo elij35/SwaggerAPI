@@ -48,6 +48,13 @@ public struct UpdateUser
     public string MarketingLanguage { get; set; }
 }
 
+public struct Login
+{
+    [Required]
+    public string Email { get; set; }
+    [Required]
+    public string Password { get; set; }
+}
 public struct SecurityKey
 {
     public string Key { get; set; }

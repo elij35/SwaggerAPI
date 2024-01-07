@@ -10,7 +10,7 @@ namespace webapp.Controllers
         [HttpDelete]
         [Route("/api/admin/delete/{id}")]
 
-        public async Task<string> DeleteUser([FromRoute] int id, [FromBody] AuthenticationAPI.Login adminCredentials)
+        public async Task<string> DeleteUser([FromRoute] int id, [FromBody] Login adminCredentials)
         {
             using (DataContext dbContext = new DataContext())
             {
