@@ -64,6 +64,11 @@ namespace webapp.Controllers
                 {
                     return await new ResultOutput<string>("User not found in the database").Serialize();
                 }
+
+                if (userCredentials.Password != userProfile.Password)
+                {
+                    return await new ResultOutput<string>("Wrong password").Serialize();
+                }
                 string authToken = Token.Instance.AuthorizeUser(userProfile.UserID);
                 return await new ResultOutput<string>(authToken).Serialize();
             }
