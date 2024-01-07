@@ -66,5 +66,25 @@ namespace webapp
                 return BitConverter.ToString(randomBytes).Replace("-", "");
             }
         }
+
+        // Get user ID from a given token
+        public int GetIDFromToken(string token)
+        {
+            if (IsValidToken(token))
+            {
+                return ExtractUserID(token);
+            }
+            return -1;
+        }
+
+        private bool IsValidToken(string token)
+        {
+            return securityToken.ContainsKey(token);
+        }
+
+        private int ExtractUserID(string token)
+        {
+            return securityToken[token].UserID;
+        }
     }
 }
