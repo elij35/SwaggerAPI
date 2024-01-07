@@ -68,5 +68,22 @@ namespace webapp.Controllers
                 return await new ResultOutput<string>(authToken).Serialize();
             }
         }
+
+        [HttpPost]
+        [Route("/api/user/get-self/")]
+        public async Task<string> GetUserProfile([FromBody] SecurityKey securityKey)
+        {
+            Token tokenManager = Token.Instance;
+            int userID = tokenManager.GetIDFromToken(securityKey.Key);
+
+            DataContext dbContext = new DataContext();
+            UserProfile userProfile = dbContext.UserProfiles.FirstOrDefault(user => user.UserID == userID);
+
+            if (userProfile == null)
+            {
+                return await new ResultOutput<string>("User profile not found").Serialize();
+            }
+            return await new ResultOutput<ShowSelf>(new ShowSelf(userProfile)).Serialize();
+        }
     }
 }
